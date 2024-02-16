@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+    <head>
+        <title>Puzzle Messenger</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <link th:href="@{/css/style.css}" rel="stylesheet"></link>
+
+    </head>
+
+    <body>
+        <h1>Puzzle Messenger</h1>
+        <p>Welcome to your puzzle!</p>
+            <p>Puzzle Message:</p>
+            <input type="hidden" id="secretMessage" th:value="${puzzle.message}"/>
+            <canvas class="myCanvas"></canvas>
+            <div id="checkbutton"></div>
+            <div id="testmessage"></div>
+            <script th:src="@{/js/puzzle.js}"></script>
+            <p>Share your puzzle: http://localhost:8080/puzzle/<span th:text="${puzzle.id}"></span></p>
+            <a href="/index" th:href="@{/}" class="btn btn-small btn-success">Return to Generator</a>
+    </body>
+</html>

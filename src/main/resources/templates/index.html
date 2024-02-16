@@ -1,0 +1,23 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head> 
+    <title>Puzzle Messenger</title> 
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link th:href="@{/css/style.css}" rel="stylesheet"></link>
+</head>
+<body>
+    <h1>Puzzle Messenger</h1>
+
+	<p>Become the secret agent you've always wanted to be:</p>
+
+	<p>Enter a message to be converted into a puzzle and sent to your
+		friends!</p>
+
+    <div id="#form-div">
+        <form th:action="@{/puzzle}" th:object="${puzzle}" method="post">
+            <p>Message: <input type="text" name="message" th:value="${message}" /></p>
+            <p> <input type="submit" value="Generate Puzzle" /> </p>
+        </form>
+    </div>
+</body>
+</html>
