@@ -289,5 +289,12 @@ function displayMessage(score) {
     msg.innerHTML = "Try Again!";
   }
 }
+function copyLink(){
+  var linkText = document.getElementById("linkText");
+  let copiedLink = "http://localhost:8080/puzzle/" + linkText.value;
+  console.log(copiedLink)
+  navigator.clipboard.writeText(copiedLink);
+}
+
 generatePuzzle(submitted_message);
 

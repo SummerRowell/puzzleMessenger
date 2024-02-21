@@ -16,7 +16,10 @@
             <canvas class="myCanvas"></canvas>
             <div id="testmessage"></div>
             <script th:src="@{/js/puzzle.js}"></script>
-            <p>Share your puzzle: http://localhost:8080/puzzle/<span th:text="${puzzle.id}"></span></p>
+            <input type="hidden" id="linkText" th:value="${puzzle.id}" />
+
+            <!-- <p>Share your puzzle: http://localhost:8080/puzzle/<span th:text="${puzzle.id}"></span></p> -->
+            <p>Share your puzzle: <button onclick="copyLink()">Copy Link</button> </p>
             <div id="returnButton">
                 <a href="/index" th:href="@{/}" class="btn btn-small btn-success">Return to Generator</a>
             </div>
