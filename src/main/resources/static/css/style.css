@@ -1,11 +1,13 @@
 html {
-	font-size: 10px;
-	font-family: 'Open Sans', sans-serif;
+	font-size: 14px;
+	font-family: 'Georgia', serif;
 }
 
 h1 {
 	font-size: 60px;
 	text-align: center;
+	padding: 20px 20px 10px 20px;
+
 }
 
 p, li {
@@ -24,7 +26,7 @@ body {
 	line-height: 2;
 	letter-spacing: 1px;
 	text-align: center;
-	margin: 20px auto;
+	margin: 10px auto;
 	display: block;
 	background-color: #ebdccb;
 	padding: 20px 20px 20px 20px;
@@ -33,7 +35,7 @@ body {
 
 h1 {
 	margin: 0;
-	padding: 20px 0;
+	padding: 10px 0;
 	color: #00539F;
 	text-shadow: 5px 4px 1px #a4af08;
 }
@@ -51,5 +53,5 @@ img {
 canvas {
 	display: block;
 	margin: 0 auto;
-	border: 1px solid blue;
+	border: 4px dashed #64cc45;
 }
