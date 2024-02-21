@@ -16,7 +16,7 @@
     <div id="#form-div">
         <form th:action="@{/puzzle}" th:object="${puzzle}" method="post">
             <p>Message: <input type="text" name="message" th:value="${message}" /></p>
-            <p> <input type="submit" value="Generate Puzzle" /> </p>
+            <p> <input id="generate" type="submit" value="Generate Puzzle" /> </p>
         </form>
     </div>
 </body>

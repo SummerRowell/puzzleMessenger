@@ -42,16 +42,28 @@ public class PuzzleController {
 
     @PostMapping("/puzzle")
     public void testpuzzle(@RequestParam String message, HttpServletResponse response) {
-        Puzzle puzzle = new Puzzle(message);
-        repository.save(puzzle);
-        String newMessage = puzzle.message;
-        System.out.println("New Puzzle: " + newMessage);
-        String puzzleID = puzzle.id;
-        String redirectURL = "puzzle/" + puzzleID;
-        try {
-            response.sendRedirect(redirectURL);
-        } catch (IOException e) {
-            e.printStackTrace();
+        Puzzle existingPuzzle = repository.findByMessage(message);
+        if (existingPuzzle != null) {
+            System.out.println("Puzzle exists: " + existingPuzzle.message);
+            String puzzleID = existingPuzzle.id;
+            String redirectURL = "puzzle/" + puzzleID;
+            try {
+                response.sendRedirect(redirectURL);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } else {
+            Puzzle puzzle = new Puzzle(message);
+            repository.save(puzzle);
+            String newMessage = puzzle.message;
+            System.out.println("New Puzzle: " + newMessage);
+            String puzzleID = puzzle.id;
+            String redirectURL = "puzzle/" + puzzleID;
+            try {
+                response.sendRedirect(redirectURL);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 

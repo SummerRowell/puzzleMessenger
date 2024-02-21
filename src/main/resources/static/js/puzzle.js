@@ -220,7 +220,6 @@ function generatePuzzle(inputMessage) {
   let xVal = 10;
   let yVal = 10;
   var shuffled = shuffle(inputMessage);
-  let numRows = Math.ceil(len / maxRowLen);
   if (len < maxRowLen) {
     blocksPerRow = len;
   } else {
@@ -229,6 +228,7 @@ function generatePuzzle(inputMessage) {
 
   let blocksRemaining = shuffled.length;
   let blockIndex = -1;
+  let blocksTall = 0;
 
   while (blocksRemaining > 0) {
     for (let i = 1; i < len && blocksRemaining > 0; i++) {
@@ -242,6 +242,7 @@ function generatePuzzle(inputMessage) {
         i++;
         blocksRemaining--;
       }
+      blocksTall++;
       yVal = yVal + (blockSize + 10);
     }
   }
@@ -255,19 +256,28 @@ function generatePuzzle(inputMessage) {
       i--;
       for (let j = 0; j < blocksPerRow && blankBlocksRemaining > 0; j++) {
         blankBlockIndex++;
-        console.log("Generating empty block at " + blankBlockIndex + " with char " + inputMessage.charAt(blankBlockIndex));
         const blankBlock = new BlankBlock(xVal, yVal + blockSize + 5, inputMessage.charAt(blankBlockIndex), blankBlockIndex);
         blankBlocks.push(blankBlock);
         xVal = xVal + blockSize + 5;
         i++;
         blankBlocksRemaining--;
-        console.log("Blocks remaining: " + blankBlocksRemaining);
       }
+      blocksTall++;
       yVal = yVal + (blockSize + 10);
     }
   }
-  canvas.width = (blocksPerRow * (blockSize + 10));
-  canvas.height = (2 * ((numRows) * (blockSize + 10) + 10));
+
+  console.log("Blocks per row: " + blocksPerRow + " Blocks Tall: " + blocksTall);
+  if (blocksPerRow % 2 == 1) {
+    console.log("first")
+    canvas.width = (blocksPerRow * (blockSize + 10));
+  } else {
+    console.log("Even")
+    canvas.width = (15 + (blocksPerRow * (blockSize + 5)));
+  }
+  canvas.height = ((blocksTall + 1) * (blockSize + 10));
+  console.log("Height: " + canvas.height + " Width: " + canvas.width);
+
   drawBlocks();
 }
 
