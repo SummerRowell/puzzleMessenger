@@ -50,7 +50,7 @@ img {
 	margin: 0 auto;
 }
 
-a, #generate {
+a, #generate, button {
 	background-color: #00539F;
 	padding-left: 20px;
 	padding-right: 20px;
