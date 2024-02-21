@@ -1,11 +1,13 @@
 html {
-	font-size: 10px;
-	font-family: 'Open Sans', sans-serif;
+	font-size: 14px;
+	font-family: 'Georgia', serif;
 }
 
 h1 {
 	font-size: 60px;
 	text-align: center;
+	padding: 20px 20px 10px 20px;
+
 }
 
 p, li {
@@ -28,12 +30,12 @@ body {
 	display: block;
 	background-color: #ebdccb;
 	padding: 20px 20px 20px 20px;
-	border: 5px solid black;
+	border: 25px inset #cfffc0;
 }
 
 h1 {
 	margin: 0;
-	padding: 20px 0;
+	padding: 10px 0;
 	color: #00539F;
 	text-shadow: 5px 4px 1px #a4af08;
 }
@@ -48,8 +50,30 @@ img {
 	margin: 0 auto;
 }
 
+a, #generate {
+	background-color: #00539F;
+	padding-left: 20px;
+	padding-right: 20px;
+	/* border: 2px dotted #64cc45; */
+	color: #64cc45;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 20px;
+}
+
 canvas {
 	display: block;
 	margin: 0 auto;
-	border: 1px solid blue;
+	border: 4px dashed #64cc45;
 }
+
+#testmessage {
+	font-size: 30px;
+	text-align: center;
+	margin: 0;
+	padding: 20px 0;
+	color: #00539F;
+	text-shadow: 2px 1px 1px #a4af08;
+}
+

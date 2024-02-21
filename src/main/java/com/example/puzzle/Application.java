@@ -4,8 +4,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 
 @SpringBootApplication
+@EnableMongoRepositories
 public class Application implements CommandLineRunner {
 
 	@Autowired
@@ -18,8 +20,8 @@ public class Application implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 	
-		repository.deleteAll();
-		repository.save(new Puzzle("Hello!"));
+		// repository.deleteAll();
+		// repository.save(new Puzzle("Hello!"));
 
 		System.out.println("Puzzles found:" );
 		System.out.println("----------------");
