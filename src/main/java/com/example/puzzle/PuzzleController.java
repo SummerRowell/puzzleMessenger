@@ -39,9 +39,6 @@ public class PuzzleController {
 
     @PostMapping("/puzzle")
     public void testpuzzle(@RequestParam String message, HttpServletResponse response) {
-        // if (message == "") {
-            
-        // }899896
         Puzzle existingPuzzle = repository.findByMessage(message);
         if (existingPuzzle != null) {
             String puzzleID = existingPuzzle.id;
