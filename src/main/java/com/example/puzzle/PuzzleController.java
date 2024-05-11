@@ -25,15 +25,12 @@ public class PuzzleController {
 
     @GetMapping("/puzzle/{id}")
     public ModelAndView homePage(Model model, @PathVariable String id) {
-        System.out.println(id);
         if (id == "") {
             return new ModelAndView("/errorpage.html");
         }
         Optional<Puzzle> puzzle = repository.findById(id);
         if (puzzle.isPresent()) {
             Puzzle getPuzzle = puzzle.get();
-            String message = getPuzzle.message;
-            System.out.println("Test: " + message);
             return new ModelAndView("/puzzleview.html", "puzzle", getPuzzle);
         } else {
             return new ModelAndView("/errorpage.html");
@@ -42,9 +39,11 @@ public class PuzzleController {
 
     @PostMapping("/puzzle")
     public void testpuzzle(@RequestParam String message, HttpServletResponse response) {
+        // if (message == "") {
+            
+        // }
         Puzzle existingPuzzle = repository.findByMessage(message);
         if (existingPuzzle != null) {
-            System.out.println("Puzzle exists: " + existingPuzzle.message);
             String puzzleID = existingPuzzle.id;
             String redirectURL = "puzzle/" + puzzleID;
             try {
@@ -55,8 +54,6 @@ public class PuzzleController {
         } else {
             Puzzle puzzle = new Puzzle(message);
             repository.save(puzzle);
-            String newMessage = puzzle.message;
-            System.out.println("New Puzzle: " + newMessage);
             String puzzleID = puzzle.id;
             String redirectURL = "puzzle/" + puzzleID;
             try {

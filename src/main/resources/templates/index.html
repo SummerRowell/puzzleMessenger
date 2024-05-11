@@ -6,18 +6,25 @@
     <link th:href="@{/css/style.css}" rel="stylesheet"></link>
 </head>
 <body>
-    <h1>Puzzle Messenger</h1>
+    <div id="page">
+        <div id="main-body">
+            <h1>Puzzle Messenger</h1>
 
-	<p>Become the secret agent you've always wanted to be:</p>
+            <h2>Welcome to Puzzle Messenger!</h2>
+            <h2>Enter a message below to generate a shareable word-scramble puzzle.</h2>
 
-	<p>Enter a message to be converted into a puzzle and sent to your
-		friends!</p>
+            <div id="#form-div">
+                <form th:action="@{/puzzle}" th:object="${puzzle}" method="post">
+                    <p>Message: <input type="text" name="message" th:value="${message}" /></p>
+                    <p> <input id="generate" type="submit" value="Generate Puzzle" /> </p>
+                </form>
+            </div>
+            <div id="null-message"></div>
+        </div>
 
-    <div id="#form-div">
-        <form th:action="@{/puzzle}" th:object="${puzzle}" method="post">
-            <p>Message: <input type="text" name="message" th:value="${message}" /></p>
-            <p> <input id="generate" type="submit" value="Generate Puzzle" /> </p>
-        </form>
+        <div class="footer">
+            <p> made by Summer Rowell &emsp; <a href="https://www.linkedin.com/in/ksrowell/"> <img src=".\images\LI-In-Bug.png" alt="LinkedIn" style="width: 39px; height: 33px;"> </a> </p>
+        </div>
     </div>
 </body>
 </html>

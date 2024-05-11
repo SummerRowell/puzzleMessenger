@@ -1,28 +1,35 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
-    <head>
-        <title>Puzzle Messenger</title>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <link th:href="@{/css/style.css}" rel="stylesheet"></link>
+<head>
+    <title>Puzzle Messenger</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link th:href="@{/css/style.css}" rel="stylesheet">
+    </link>
 
-    </head>
+</head>
 
-    <body>
-        <h1>Puzzle Messenger</h1>
-        <p>Move the blocks from the scrambled top message to the spaces below to solve your personalized puzzle!</p>
-            <p>Puzzle Message:</p>
-            <input type="hidden" id="secretMessage" th:value="${puzzle.message}"/>
+<body>
+    <div id="page">
+        <div id="main-body">
+            <h1>Puzzle Messenger</h1>
+            <h2>Move the blue blocks to the blank spaces to solve your personalized puzzle!</h2>
+            <input type="hidden" id="secretMessage" th:value="${puzzle.message}" />
             <canvas class="myCanvas"></canvas>
-            <div id="testmessage"></div>
+            <div id="finalMessage"></div>
             <script th:src="@{/js/puzzle.js}"></script>
             <input type="hidden" id="linkText" th:value="${puzzle.id}" />
-
-            <!-- <p>Share your puzzle: http://localhost:8080/puzzle/<span th:text="${puzzle.id}"></span></p> -->
             <p>Share your puzzle: <button onclick="copyLink()">Copy Link</button> </p>
             <div id="returnButton">
-                <a href="/index" th:href="@{/}" class="btn btn-small btn-success">Return to Generator</a>
+                <a id="return" href="/index" th:href="@{/}" class="btn btn-small btn-success">Return to Generator</a>
             </div>
-            
-    </body>
+        </div>
+        <div id="footer">
+            <p>made by Summer Rowell &emsp; <a href="https://www.linkedin.com/in/ksrowell/"> <img
+                        src=".\images\LI-In-Bug.png" th:src="@{/images/LI-In-Bug.png}" alt="LinkedIn"
+                        style="width: 39px; height: 33px;"> </a> </p>
+        </div>
+    </div>
+</body>
+
 </html>

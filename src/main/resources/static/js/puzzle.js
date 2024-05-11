@@ -147,7 +147,6 @@ function handleMouseDown(event) {
   });
 
   if (blockSelected && blankBlockSelected) {
-    console.log("testing char " + selectedBlock.char + "against char " + selectedBlankBlock.char);
     if (selectedBlock.char == selectedBlankBlock.char) {
       moveBlocks(selectedBlankBlock, selectedBlock);
     } else {
@@ -225,30 +224,9 @@ function generatePuzzle(inputMessage) {
   } else {
     blocksPerRow = maxRowLen;
   }
-
-  let blocksRemaining = shuffled.length;
-  let blockIndex = -1;
-  let blocksTall = 0;
-
-  while (blocksRemaining > 0) {
-    for (let i = 1; i < len && blocksRemaining > 0; i++) {
-      xVal = 10;
-      i--;
-      for (let j = 0; j < blocksPerRow && blocksRemaining > 0; j++) {
-        blockIndex++;
-        const block = new Block(xVal, yVal, shuffled.charAt(blockIndex), blockIndex);
-        blocks.push(block);
-        xVal = xVal + blockSize + 5;
-        i++;
-        blocksRemaining--;
-      }
-      blocksTall++;
-      yVal = yVal + (blockSize + 10);
-    }
-  }
-
   let blankBlocksRemaining = len;
   let blankBlockIndex = -1;
+  let blocksTall = 0;
 
   while (blankBlocksRemaining > 0) {
     for (let i = 1; i < len && blankBlocksRemaining > 0; i++) {
@@ -256,7 +234,7 @@ function generatePuzzle(inputMessage) {
       i--;
       for (let j = 0; j < blocksPerRow && blankBlocksRemaining > 0; j++) {
         blankBlockIndex++;
-        const blankBlock = new BlankBlock(xVal, yVal + blockSize + 5, inputMessage.charAt(blankBlockIndex), blankBlockIndex);
+        const blankBlock = new BlankBlock(xVal, yVal, inputMessage.charAt(blankBlockIndex), blankBlockIndex);
         blankBlocks.push(blankBlock);
         xVal = xVal + blockSize + 5;
         i++;
@@ -267,22 +245,38 @@ function generatePuzzle(inputMessage) {
     }
   }
 
-  console.log("Blocks per row: " + blocksPerRow + " Blocks Tall: " + blocksTall);
+  let blocksRemaining = shuffled.length;
+  let blockIndex = -1;
+
+  while (blocksRemaining > 0) {
+    for (let i = 1; i < len && blocksRemaining > 0; i++) {
+      xVal = 10;
+      i--;
+      for (let j = 0; j < blocksPerRow && blocksRemaining > 0; j++) {
+        blockIndex++;
+        const block = new Block(xVal, yVal + blockSize + 5, shuffled.charAt(blockIndex), blockIndex);
+        blocks.push(block);
+        xVal = xVal + blockSize + 5;
+        i++;
+        blocksRemaining--;
+      }
+      blocksTall++;
+      yVal = yVal + (blockSize + 10);
+    }
+  }
+
   if (blocksPerRow % 2 == 1) {
-    console.log("first")
     canvas.width = (blocksPerRow * (blockSize + 10));
   } else {
-    console.log("Even")
     canvas.width = (15 + (blocksPerRow * (blockSize + 5)));
   }
   canvas.height = ((blocksTall + 1) * (blockSize + 10));
-  console.log("Height: " + canvas.height + " Width: " + canvas.width);
 
   drawBlocks();
 }
 
 function displayMessage(score) {
-  msg = document.getElementById("testmessage");
+  msg = document.getElementById("finalMessage");
   if (score == 0) {
     msg.innerHTML = "Great job!!!";
   } else {
@@ -292,7 +286,6 @@ function displayMessage(score) {
 function copyLink(){
   var linkText = document.getElementById("linkText");
   let copiedLink = "http://localhost:8080/puzzle/" + linkText.value;
-  console.log(copiedLink)
   navigator.clipboard.writeText(copiedLink);
 }
 

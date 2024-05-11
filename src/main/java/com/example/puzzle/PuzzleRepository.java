@@ -4,8 +4,6 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 
 public interface PuzzleRepository extends MongoRepository<Puzzle, String> {
 
-    
-
     public Puzzle findByMessage(String message);
-    // public Puzzle findById(String id);
+    
 }

@@ -19,12 +19,6 @@ public class Application implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-	
-		// repository.deleteAll();
-		// repository.save(new Puzzle("Hello!"));
-
-		System.out.println("Puzzles found:" );
-		System.out.println("----------------");
 		for (Puzzle puzzle : repository.findAll()) {
 			System.out.println(puzzle);
 		}		
