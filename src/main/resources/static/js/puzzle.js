@@ -285,7 +285,7 @@ function displayMessage(score) {
 }
 function copyLink(){
   var linkText = document.getElementById("linkText");
-  let copiedLink = "http://localhost:8080/puzzle/" + linkText.value;
+  let copiedLink = "http://puzzle-messenger-0af79b63d69d.herokuapp.com/puzzle/" + linkText.value;
   navigator.clipboard.writeText(copiedLink);
 }
 
