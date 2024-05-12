@@ -31,9 +31,9 @@ public class PuzzleController {
         Optional<Puzzle> puzzle = repository.findById(id);
         if (puzzle.isPresent()) {
             Puzzle getPuzzle = puzzle.get();
-            return new ModelAndView("/puzzleview.html", "puzzle", getPuzzle);
+            return new ModelAndView("puzzleview.html", "puzzle", getPuzzle);
         } else {
-            return new ModelAndView("/errorpage.html");
+            return new ModelAndView("errorpage.html");
         }
     }
 
