@@ -1,10 +1,9 @@
-const blockSize = 50;
-const gridBlockSize = 60;
+const blockSize = 60;
 const form = document.querySelector("inputmessage");
 const canvas = document.querySelector(".myCanvas");
 const width = (canvas.width = 400);
 const height = (canvas.height = 300);
-const maxRowLen = 10;
+const maxRowLen = 15;
 const ctx = canvas.getContext("2d");
 var blockSelected = false;
 var blankBlockSelected = false;
@@ -69,6 +68,7 @@ class BlankBlock {
     var midpointY = this.y + (blockSize / 2);
     if (this.char == " ") {
       this.isCorrect = true;
+      this.isSelectable = false;
     } else if (this.isCorrect) {
       ctx.fillStyle = "cadetblue";
       ctx.fillRect(this.x, this.y, this.width, this.height);
@@ -92,17 +92,6 @@ function drawBlocks() {
   blankBlocks.forEach((blankBlock) => {
     blankBlock.drawBlock();
   });
-}
-
-function getBlockChar(index) {
-  len = blocks.length;
-  for (let i = 0; i < len; i++) {
-    curBlock = blocks[i];
-    if (curBlock.index == index) {
-      return curBlock.char;
-    }
-  }
-  return 0;
 }
 
 let blocks = [];
@@ -215,38 +204,49 @@ function shuffle(inputString) {
 }
 
 function generatePuzzle(inputMessage) {
-  len = inputMessage.length;
+  const words = inputMessage.split(' ');
+  wordsLen = words.length;
+
   let xVal = 10;
   let yVal = 10;
-  var shuffled = shuffle(inputMessage);
-  if (len < maxRowLen) {
-    blocksPerRow = len;
-  } else {
-    blocksPerRow = maxRowLen;
-  }
-  let blankBlocksRemaining = len;
-  let blankBlockIndex = -1;
+
+  let blankIndex = -1;
+  let curLength = 0;
   let blocksTall = 0;
+  let blocksPerRow = 0;
 
-  while (blankBlocksRemaining > 0) {
-    for (let i = 1; i < len && blankBlocksRemaining > 0; i++) {
-      xVal = 10;
-      i--;
-      for (let j = 0; j < blocksPerRow && blankBlocksRemaining > 0; j++) {
-        blankBlockIndex++;
-        const blankBlock = new BlankBlock(xVal, yVal, inputMessage.charAt(blankBlockIndex), blankBlockIndex);
-        blankBlocks.push(blankBlock);
-        xVal = xVal + blockSize + 5;
-        i++;
-        blankBlocksRemaining--;
-      }
-      blocksTall++;
+
+  words.forEach((element) => {
+    if (curLength >= maxRowLen) {
       yVal = yVal + (blockSize + 10);
-    }
-  }
+      xVal = 10;
+      blocksPerRow = Math.max(blocksPerRow, curLength);
 
+      curLength = 0;
+    }
+    let wordLen = element.length;
+    let curIndex = 0;
+    while (wordLen > 0) {
+      blankIndex++;
+      const blankBlock = new BlankBlock(xVal, yVal, element.charAt(curIndex), blankIndex);
+      blankBlocks.push(blankBlock);
+      xVal = xVal + blockSize + 5;
+      wordLen--;
+      curIndex++;
+      curLength++;
+    }
+    blankIndex++;
+    curLength++;
+    xVal = xVal + blockSize + 5;
+    blocksTall++;
+  });
+
+  len = inputMessage.length;
+
+  var shuffled = shuffle(inputMessage);
   let blocksRemaining = shuffled.length;
   let blockIndex = -1;
+  yVal = yVal + (blockSize + 10);
 
   while (blocksRemaining > 0) {
     for (let i = 1; i < len && blocksRemaining > 0; i++) {
