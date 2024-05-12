@@ -59,7 +59,7 @@ button:hover, #return:hover, #generate:hover {
 canvas {
 	display: block;
 	margin: 0 auto;
-	border: 4px dashed #A6E9FC;
+	/* border: 4px dashed #A6E9FC; */
 }
 
 #secrets {
