@@ -18,7 +18,7 @@ public class PuzzleController {
     @Autowired
     private PuzzleRepository repository;
 
-    @GetMapping("/")
+    @GetMapping("/home")
     String indexView(){
         return "index";
     }
