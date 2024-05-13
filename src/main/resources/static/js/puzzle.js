@@ -204,6 +204,8 @@ function shuffle(inputString) {
 }
 
 function generatePuzzle(inputMessage) {
+
+  console.log("generating...");
   const words = inputMessage.split(' ');
   wordsLen = words.length;
 
@@ -213,15 +215,15 @@ function generatePuzzle(inputMessage) {
   let blankIndex = -1;
   let curLength = 0;
   let blocksTall = 0;
-  let blocksPerRow = 0;
+  let blocksPerRow = maxRowLen;
 
 
   words.forEach((element) => {
+    console.log("cur length:" + curLength);
     if (curLength >= maxRowLen) {
       yVal = yVal + (blockSize + 10);
       xVal = 10;
       blocksPerRow = Math.max(blocksPerRow, curLength);
-
       curLength = 0;
     }
     let wordLen = element.length;
@@ -240,30 +242,32 @@ function generatePuzzle(inputMessage) {
     xVal = xVal + blockSize + 5;
     blocksTall++;
   });
-
+  
   len = inputMessage.length;
 
   var shuffled = shuffle(inputMessage);
+  console.log(shuffled);
   let blocksRemaining = shuffled.length;
   let blockIndex = -1;
   yVal = yVal + (blockSize + 10);
 
-  while (blocksRemaining > 0) {
-    for (let i = 1; i < len && blocksRemaining > 0; i++) {
+  console.log(len);
+  curLength = 0;
+
+  for (let i = 1; i < len && blocksRemaining > 0; i++) {
       xVal = 10;
-      i--;
       for (let j = 0; j < blocksPerRow && blocksRemaining > 0; j++) {
         blockIndex++;
         const block = new Block(xVal, yVal + blockSize + 5, shuffled.charAt(blockIndex), blockIndex);
         blocks.push(block);
-        xVal = xVal + blockSize + 5;
-        i++;
-        blocksRemaining--;
-      }
-      blocksTall++;
-      yVal = yVal + (blockSize + 10);
+      xVal = xVal + blockSize + 5;
+      i++;
+      blocksRemaining--;
     }
+    blocksTall++;
+    yVal = yVal + (blockSize + 10);
   }
+  
 
   if (blocksPerRow % 2 == 1) {
     canvas.width = (blocksPerRow * (blockSize + 10));
@@ -271,7 +275,6 @@ function generatePuzzle(inputMessage) {
     canvas.width = (15 + (blocksPerRow * (blockSize + 5)));
   }
   canvas.height = ((blocksTall + 1) * (blockSize + 10));
-
   drawBlocks();
 }
 
@@ -285,7 +288,7 @@ function displayMessage(score) {
 }
 function copyLink(){
   var linkText = document.getElementById("linkText");
-  let copiedLink = "http://puzzle-messenger-0af79b63d69d.herokuapp.com/puzzle/" + linkText.value;
+  let copiedLink = "http://localhost:8080/puzzle/" + linkText.value;
   navigator.clipboard.writeText(copiedLink);
 }
 

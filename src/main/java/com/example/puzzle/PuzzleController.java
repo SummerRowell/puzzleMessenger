@@ -26,14 +26,14 @@ public class PuzzleController {
     @GetMapping("/puzzle/{id}")
     public ModelAndView homePage(Model model, @PathVariable String id) {
         if (id == "") {
-            return new ModelAndView("/errorpage.html");
+            return new ModelAndView("errorpage.html");
         }
         Optional<Puzzle> puzzle = repository.findById(id);
         if (puzzle.isPresent()) {
             Puzzle getPuzzle = puzzle.get();
-            return new ModelAndView("puzzleview.html", "puzzle", getPuzzle);
+            return new ModelAndView("puzzleview", "puzzle", getPuzzle);
         } else {
-            return new ModelAndView("errorpage.html");
+            return new ModelAndView("errorpage");
         }
     }
 
@@ -63,6 +63,6 @@ public class PuzzleController {
 
     @GetMapping("/error")
     public String errorMessage() {
-        return "Something went wrong";
+        return "errorpage";
     }
 }
