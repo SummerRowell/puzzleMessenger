@@ -204,8 +204,7 @@ function shuffle(inputString) {
 }
 
 function generatePuzzle(inputMessage) {
-
-  console.log("generating...");
+  inputMessage = inputMessage.toUpperCase();
   const words = inputMessage.split(' ');
   wordsLen = words.length;
 
@@ -219,10 +218,11 @@ function generatePuzzle(inputMessage) {
 
   words.forEach((element) => {
     let testLen = element.length;
-    console.log(testLen);
+    console.log(element);
     if(testLen >= blocksPerRow) {
       blocksPerRow = testLen;
     }
+
     if (curLength >= maxRowLen) {
       yVal = yVal + (blockSize + 10);
       xVal = 10;
@@ -241,6 +241,9 @@ function generatePuzzle(inputMessage) {
       curIndex++;
       curLength++;
     }
+    blocksPerRow = Math.max(blocksPerRow, curLength);
+
+    console.log(curLength);
     blankIndex++;
     curLength++;
     xVal = xVal + blockSize + 5;
@@ -266,7 +269,10 @@ function generatePuzzle(inputMessage) {
     }
     blocksTall++;
     yVal = yVal + (blockSize + 10);
-  } 
+  }
+
+  console.log("Per Row: " + blocksPerRow);
+  console.log("Tall: " + blocksTall);
 
   if (blocksPerRow % 2 == 1) {
     canvas.width = (blocksPerRow * (blockSize + 10));
