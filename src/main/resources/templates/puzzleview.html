@@ -12,14 +12,16 @@
 <body>
     <div id="page">
         <div id="main-body">
-            <h1>Puzzle Messenger</h1>
+            <div id="header">
+                <h1>Puzzle Messenger</h1>
+            </div>
             <h2>Move the blue blocks to the blank spaces to solve your personalized puzzle!</h2>
             <input type="hidden" id="secretMessage" th:value="${puzzle.message}" />
             <canvas class="myCanvas"></canvas>
             <div id="finalMessage"></div>
             <script th:src="@{/js/puzzle.js}"></script>
             <input type="hidden" id="linkText" th:value="${puzzle.id}" />
-            <p>Share your puzzle: <button onclick="copyLink()">Copy Link</button> </p>
+            <p>Share your puzzle:&emsp; <button onclick="copyLink()">Copy Link</button> </p>
             <div id="returnButton">
                 <a id="return" href="/index" th:href="@{/}" class="btn btn-small btn-success">Return to Generator</a>
             </div>

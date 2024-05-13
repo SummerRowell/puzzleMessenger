@@ -3,7 +3,7 @@ const form = document.querySelector("inputmessage");
 const canvas = document.querySelector(".myCanvas");
 const width = (canvas.width = 400);
 const height = (canvas.height = 300);
-const maxRowLen = 15;
+const maxRowLen = 10;
 const ctx = canvas.getContext("2d");
 var blockSelected = false;
 var blankBlockSelected = false;
@@ -214,17 +214,21 @@ function generatePuzzle(inputMessage) {
 
   let blankIndex = -1;
   let curLength = 0;
-  let blocksTall = 0;
-  let blocksPerRow = maxRowLen;
-
+  let blocksPerRow = 0;
+  let blocksTall = 1;
 
   words.forEach((element) => {
-    console.log("cur length:" + curLength);
+    let testLen = element.length;
+    console.log(testLen);
+    if(testLen >= blocksPerRow) {
+      blocksPerRow = testLen;
+    }
     if (curLength >= maxRowLen) {
       yVal = yVal + (blockSize + 10);
       xVal = 10;
       blocksPerRow = Math.max(blocksPerRow, curLength);
       curLength = 0;
+      blocksTall++;
     }
     let wordLen = element.length;
     let curIndex = 0;
@@ -240,18 +244,14 @@ function generatePuzzle(inputMessage) {
     blankIndex++;
     curLength++;
     xVal = xVal + blockSize + 5;
-    blocksTall++;
   });
-  
+ 
   len = inputMessage.length;
 
   var shuffled = shuffle(inputMessage);
-  console.log(shuffled);
   let blocksRemaining = shuffled.length;
   let blockIndex = -1;
   yVal = yVal + (blockSize + 10);
-
-  console.log(len);
   curLength = 0;
 
   for (let i = 1; i < len && blocksRemaining > 0; i++) {
@@ -266,8 +266,7 @@ function generatePuzzle(inputMessage) {
     }
     blocksTall++;
     yVal = yVal + (blockSize + 10);
-  }
-  
+  } 
 
   if (blocksPerRow % 2 == 1) {
     canvas.width = (blocksPerRow * (blockSize + 10));

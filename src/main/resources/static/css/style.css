@@ -1,7 +1,6 @@
 html {
 	font-family: 'Georgia', serif;
 	background-color: #144e49;
-	/* box-sizing: border-box; */
 }
 
 .footer, #footer{
@@ -22,7 +21,7 @@ html {
 
 #main-body {
 	padding-bottom: 5rem;
-	display: block;
+	display: grid;
 	line-height: 2;
 	text-align: center;
 }
@@ -57,7 +56,7 @@ button:hover, #return:hover, #generate:hover {
 }
 
 canvas {
-	display: block;
+	display: grid;
 	margin: 0 auto;
 	/* border: 4px dashed #A6E9FC; */
 }
